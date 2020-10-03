@@ -59,4 +59,6 @@ https://github.com/AlexandreYembo/hydra-order
 
 ### Hydra Payment
 
-This repository is an API that uses the Payments Gateway to complete the Order workflow
+This repository is an API that uses the Payments Gateway to complete the Order workflow.
+
+https://github.com/AlexandreYembo/hydra-payment
