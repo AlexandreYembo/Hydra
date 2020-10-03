@@ -33,7 +33,7 @@ This repository has a project created in Angular 9.
 
 https://github.com/AlexandreYembo/hydra-ui
 
-### Hydra Terraforms
+### Hydra Terraform
 
 This repository contains the terraforms to create Azure infrastructure.
 
