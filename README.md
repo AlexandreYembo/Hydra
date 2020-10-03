@@ -3,7 +3,7 @@ This repository is a link to the others repositories:
 
 ### Hydra Core
 
-This repostory is shared core of this project, it includes: Event and Command handlers, DomainException, Entity and AggregateRoot, IRepositories for Database, Eventsource persisting, etc.
+This repostory is shared core of this project, it includes: Event and Command handlers, DomainException, Entity and AggregateRoot, IRepositories for Database, Eventsourcing persisting, etc.
 
 https://github.com/AlexandreYembo/hydra-core
 
