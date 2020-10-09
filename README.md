@@ -39,11 +39,11 @@ This repository contains the terraforms to create Azure infrastructure.
 
 https://github.com/AlexandreYembo/hydra-cloud-terraform
 
-### Hydra Client
+### Hydra Customers
 
 This repository is an API for Client
 
-https://github.com/AlexandreYembo/hydra-clients
+https://github.com/AlexandreYembo/hydra-customers
 
 ### Hydra Catalog
 
