@@ -1,6 +1,12 @@
 # Hydra - Project
 This repository is a link to the others repositories:
 
+### Api Gateway
+
+This repository contains few projects used as API Gateway, for orchestration of services
+
+https://github.com/AlexandreYembo/hydra-api-gateway
+
 ### Hydra Core
 
 This repostory is shared core of this project, it includes: Event and Command handlers, DomainException, Entity and AggregateRoot, IRepositories for Database, Eventsourcing persisting, etc.
