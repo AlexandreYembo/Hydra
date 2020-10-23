@@ -63,6 +63,12 @@ This repository is an API for Basket.
 
 https://github.com/AlexandreYembo/hydra-basket
 
+### Hydra Voucher
+
+This repository is an API to obtain the voucher. It integrates with Basket and Order
+
+https://github.com/AlexandreYembo/hydra-voucher
+
 ### Hydra Order
 
 This repository is an API to process the items Order.
