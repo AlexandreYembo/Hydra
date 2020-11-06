@@ -27,11 +27,11 @@ https://github.com/AlexandreYembo/hydra-tests-core
 
 
 
-### Hydra Authentication
+### Hydra Identity Server 4
 
 This repository I have followed up the Identity Server 4 documentation and also I've implemented few customizations.
 
-https://github.com/AlexandreYembo/hydra-authentication
+https://github.com/AlexandreYembo/hydra-identityserver4
 
 ### Hydra Admin
 
