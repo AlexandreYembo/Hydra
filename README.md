@@ -33,6 +33,13 @@ This repository I have followed up the Identity Server 4 documentation and also 
 
 https://github.com/AlexandreYembo/hydra-identityserver4
 
+### Hydra Authentication
+
+This repository is an alternative to use aspnet identity rather than Identity Server 4.
+
+https://github.com/AlexandreYembo/hydra-authentication
+
+
 ### Hydra Admin
 
 This repository has a project created in Angular 9.
