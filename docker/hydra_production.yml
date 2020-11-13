@@ -1,0 +1,95 @@
+version: "3"
+
+services:
+  rabbitmq:
+        image: rabbitmq:3-management
+        container_name: rabbit-hydra
+        environment:
+            RABBITMQ_DEFAULT_USER: "hydra"
+            RABBITMQ_DEFAULT_PASS: "hydra"
+
+  sql-server:
+        image: alexandreyembo/hydra-sql-server:latest
+        container_name: hydra-sql-server
+        build: 
+            context: ../sql
+            dockerfile: ./Dockerfile
+        environment:
+            SA_PASSWORD: "Prod@123"
+            ACCEPT_EULA: "Y"
+  redis:
+    image: redis
+    container_name: redis-hydra
+    # image: "redis:alpine"
+    # container_name: redis-hydra
+    # # command: redis-server --requirepass sOmE_sEcUrE_pAsS
+    # ports:
+    #  - "6379:6379"
+    # volumes:
+    #  - $PWD/redis-data:/var/lib/redis
+    #   - $PWD/redis.conf:/usr/local/etc/redis/redis.conf
+    # environment:
+    #  - REDIS_REPLICATION_MODE=master
+    # networks:
+    #   node_net:
+    #     ipv4_address: 172.28.1.4
+
+# networking for the Redis container
+
+  identity-api:
+        image:  alexandreyembo/hydra-identity-api:latest
+        container_name: hydra-identity-api
+        build: 
+            context: ../../hydra-authentication
+            dockerfile: ./dotnet3.1/Hydra.Identity.API/Dockerfile
+        restart: always
+        ports:
+  #     # the application wont run on this ports
+        - "5001:5001"          
+        environment: 
+            - ASPNETCORE_ENVIRONMENT=Production
+            - ASPNETCORE_URLS=https://+:55201;http://+55202
+        # volumes:
+        #     - ./certs:/https:ro
+        depends_on:
+          - rabbitmq
+          - sql-server
+
+  basket-api:
+        image:  alexandreyembo/hydra-basket-api:latest
+        container_name: hydra-basket-api
+        build: 
+            context: ../../hydra-basket
+            dockerfile: ./dotnet3.1/Hydra.Basket.API/Dockerfile
+        restart: always
+        ports:
+  #     # the application wont run on this ports
+        - "5002:5002"          
+        environment: 
+            - ASPNETCORE_ENVIRONMENT=Production
+            - ASPNETCORE_URLS=https://+:55221;http://+55222
+        # volumes:
+        #     - ./certs:/https:ro
+        depends_on:
+          - rabbitmq
+          - redis
+    # TODO LATER
+#   hydra-server:
+#         image:  alexandreyembo/hydra-server:latest
+#         container_name: hydra-server
+#         build: 
+#             context: ./
+#             dockerfile: ./nginx/Dockerfile
+#         restart: always
+#         ports:
+#   #     # the application wont run on this ports
+#         - "80:80"          
+#         - "443:443"          
+        
+#         # volumes:
+#         #     - ./certs:/https:ro
+#         depends_on:
+#           - hydra-ecommerce
+       
+
+ 

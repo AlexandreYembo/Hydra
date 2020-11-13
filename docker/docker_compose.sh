@@ -1,0 +1,1 @@
+docker-compose -f hydra_production.yml up --build
