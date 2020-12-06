@@ -16,6 +16,8 @@ services:
         build: 
             context: ../sql
             dockerfile: ./Dockerfile
+        ports:
+          - "1433:1433"
         environment:
             SA_PASSWORD: "Prod@123"
             ACCEPT_EULA: "Y"
@@ -28,53 +30,34 @@ services:
             context: ../../hydra-authentication
             dockerfile: ./dotnet3.1/Hydra.Identity.API/Dockerfile
         restart: always
-        environment: 
-            - ASPNETCORE_ENVIRONMENT=Production
-            - ASPNETCORE_URLS=https://+:5101;http://+5102
-            - ASPNETCORE_Kestrel__Certificates__Default__Password=hydra
-            - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/hydra-certificate.pfx
+        ports:
+          - "5202:5202"
+        # environment: 
+        #     - ASPNETCORE_ENVIRONMENT=Production
+        #     - ASPNETCORE_URLS=https://+:5201;http://+5202
+        #     - ASPNETCORE_Kestrel__Certificates__Default__Password=hydra
+        #     - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/hydra-certificate.pfx
+        environment:
+           - ASPNETCORE_ENVIRONMENT=Production
+           - ASPNETCORE_URLS=http://*:5202
         # volumes:
-        # ro -> remote origin
-            - ./certs:/https:ro
+        #     - ./certs:/https:ro
         depends_on:
           - rabbitmq
           - sql-server
 
-#   basket-api:
-#         image:  alexandreyembo/hydra-basket-api:latest
-#         container_name: hydra-basket-api
-#         build: 
-#             context: ../../hydra-basket
-#             dockerfile: ./dotnet3.1/Hydra.Basket.API/Dockerfile
-#         restart: always
-#         ports:
-#   #     # the application wont run on this ports
-#         - "5002:5002"          
-#         environment: 
-#             - ASPNETCORE_ENVIRONMENT=Production
-#             - ASPNETCORE_URLS=https://+:55221;http://+55222
-#         # volumes:
-#         #     - ./certs:/https:ro
-#         depends_on:
-#           - rabbitmq
-#           - redis
-    # TODO LATER
 #   hydra-server:
-#         image:  alexandreyembo/hydra-server:latest
-#         container_name: hydra-server
+#         image: alexandreyembo/hydra-server:latest
+#         container_name: hydra-server    
 #         build: 
 #             context: ./
-#             dockerfile: ./nginx/Dockerfile
-#         restart: always
+#             dockerfile: ./nginx/Dockerfile 
+#         restart: always 
 #         ports:
-#   #     # the application wont run on this ports
-#         - "80:80"          
-#         - "443:443"          
-        
-#         # volumes:
-#         #     - ./certs:/https:ro
+#             - "80:80"
+#             - "443:443"
 #         depends_on:
-#           - hydra-ecommerce
-       
+#             - web-mvc
 
- 
+volumes:
+    dpkeys:     
