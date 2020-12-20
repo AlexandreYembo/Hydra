@@ -26,6 +26,22 @@ services:
             SA_PASSWORD: "Prod@123"
             ACCEPT_EULA: "Y"
 
+  # hydra-admin:
+  #   image:  alexandreyembo/hydra-admin:latest
+  #   container_name: hydra-admin
+  #   build:
+  #     context: ../../hydra-ui
+  #     dockerfile: ./hydra-admin/Dockerfile
+  #   ports:
+  #     - "4201:4201"
+  #   volumes:
+  #      - ./hydra-admin:/usr/src/app/hydra-admin
+  #      - /usr/src/app/hydra-admin/node_modules
+  #   depends_on:
+  #      - identity-api
+  #      - customers-api
+  #      - catalog-api
+       
   identity-api:
         image:  alexandreyembo/hydra-identity-api:latest
         #  you might not use container_name if you are using load balance
@@ -68,6 +84,31 @@ services:
         environment:
            - ASPNETCORE_ENVIRONMENT=Production
            - ASPNETCORE_URLS=http://*:5302
+        # volumes:
+        #     - ./certs:/https:ro
+        depends_on:
+          - rabbitmq
+          - identity-api
+          - sql-server
+
+  catalog-api:
+        image:  alexandreyembo/hydra-catalog-api:latest
+        #  you might not use container_name if you are using load balance
+        container_name: hydra-catalog-api
+        build: 
+            context: ../../hydra-catalog
+            dockerfile: ./dotnet3.1/Hydra.Catalog.API/Dockerfile
+        restart: always
+        ports:
+          - "5402:5402"
+        # environment: 
+        #     - ASPNETCORE_ENVIRONMENT=Production
+        #     - ASPNETCORE_URLS=https://+:5201;http://+5202
+        #     - ASPNETCORE_Kestrel__Certificates__Default__Password=hydra
+        #     - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/hydra-certificate.pfx
+        environment:
+           - ASPNETCORE_ENVIRONMENT=Production
+           - ASPNETCORE_URLS=http://*:5402
         # volumes:
         #     - ./certs:/https:ro
         depends_on:
