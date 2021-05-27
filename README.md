@@ -1,4 +1,4 @@
-# Hydra - Project
+# Hydra Ecommerce
 This repository is a link to the others repositories:
 
 ### Hydra Wiki
