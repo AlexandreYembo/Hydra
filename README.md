@@ -1,8 +1,6 @@
 # Hydra Ecommerce
-This repository is a link to the others repositories:
+Hydra ecommerce is an open source platform that allows you to create user, customer, suppliers, products and categories, create item in a basket, apply vourcher, create order, process the payment and tracking the shipping.
 
-### Hydra Wiki
+### Summary
 
-Check the complete document in the wiki section:
-
-https://github.com/AlexandreYembo/Hydra/wiki
+[1- List of repositories](https://github.com/AlexandreYembo/Hydra-Ecommerce/wiki)
